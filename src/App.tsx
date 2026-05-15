@@ -53,6 +53,7 @@ export default function App() {
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
   const [progressBarWidth, setProgressBarWidth] = useState(0);
   const [lanterns, setLanterns] = useState<{ id: number, x: number, message: string }[]>([]);
+  const [hasReleasedLantern, setHasReleasedLantern] = useState(false);
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const autoScrollTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -199,6 +200,7 @@ export default function App() {
   };
 
   const releaseLantern = (e: MouseEvent | TouchEvent) => {
+    setHasReleasedLantern(true);
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const x = 'touches' in e ? (e as any).touches[0].clientX - rect.left : (e as MouseEvent).clientX - rect.left;
     const message = LANTERN_MESSAGES[Math.floor(Math.random() * LANTERN_MESSAGES.length)];
@@ -406,7 +408,7 @@ export default function App() {
         >
           <h2 className="section-title"><span className="title-icon"><Sparkles /></span>The Magic Sky</h2>
           <div className="sky-container" onClick={releaseLantern}>
-            <div className="sky-tip">Click anywhere to release a wish lantern...</div>
+            {!hasReleasedLantern && <div className="sky-tip">Click anywhere to release a wish lantern...</div>}
             {lanterns.map(lantern => (
               <div 
                 key={lantern.id} 
