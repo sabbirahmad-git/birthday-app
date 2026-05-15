@@ -1,0 +1,8 @@
+{
+  "name": "Zara's Birthday Surprise",
+  "description": "A beautiful, interactive birthday surprise application with animations, music, and cherished memories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
